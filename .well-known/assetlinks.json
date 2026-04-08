@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.wemayvin.todoit",
+      "sha256_cert_fingerprints": [
+        "FA:7F:00:87:27:D9:02:67:95:2B:CE:EE:AF:FE:D3:F7:6C:00:BB:E7:78:13:43:06:8E:35:91:BD:B1:B0:A9:58"
+      ]
+    }
+  }
+]

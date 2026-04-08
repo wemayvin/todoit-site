@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "AJZ26GG3CC.com.wemayvin.todoit",
+        "paths": ["*"]
+      }
+    ]
+  }
+}
