@@ -3,7 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>toDoit - 공유된 페이지</title>
+    <title>toDoit</title>
+    <script>
+        // /share/{shareId} 경로면 share/index.html과 동일한 로직 실행
+        var path = window.location.pathname;
+        if (path.startsWith('/share/')) {
+            var shareId = path.replace('/share/', '').replace('/', '');
+            if (shareId) {
+                window.location.href = 'todoit://share/' + shareId;
+                setTimeout(function() {
+                    var ua = navigator.userAgent || navigator.vendor;
+                    if (/android/i.test(ua)) {
+                        window.location.href = 'https://play.google.com/store/apps/details?id=com.wemayvin.todoit';
+                    } else if (/iPad|iPhone|iPod/.test(ua)) {
+                        window.location.href = 'https://apps.apple.com/app/todoit/id6742044928';
+                    }
+                }, 2000);
+            }
+        }
+    </script>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; color: #333; background: #f5f5f5; }
         .container { text-align: center; padding: 24px; }
@@ -13,29 +31,6 @@
         .btn:hover { background: #555; }
         .hidden { display: none; }
     </style>
-    <script>
-        (function() {
-            var path = window.location.pathname;
-            var shareId = path.replace('/share/', '').replace('/', '');
-            if (!shareId) return;
-
-            // 앱 스킴으로 열기 시도
-            var appUrl = 'todoit://share/' + shareId;
-            window.location.href = appUrl;
-
-            // 2초 후 스토어로 리다이렉트
-            setTimeout(function() {
-                var ua = navigator.userAgent || navigator.vendor;
-                if (/android/i.test(ua)) {
-                    window.location.href = 'https://play.google.com/store/apps/details?id=com.wemayvin.todoit';
-                } else if (/iPad|iPhone|iPod/.test(ua)) {
-                    window.location.href = 'https://apps.apple.com/app/todoit/id6742044928';
-                } else {
-                    document.getElementById('message').textContent = 'toDoit 앱에서 열어주세요.';
-                }
-            }, 2000);
-        })();
-    </script>
 </head>
 <body>
     <div class="container">
@@ -45,10 +40,15 @@
         <a id="btn-android" class="btn hidden" href="https://play.google.com/store/apps/details?id=com.wemayvin.todoit">Google Play에서 다운로드</a>
         <script>
             var ua = navigator.userAgent || navigator.vendor;
-            if (/android/i.test(ua)) {
-                document.getElementById('btn-android').classList.remove('hidden');
+            var path = window.location.pathname;
+            if (path.startsWith('/share/')) {
+                if (/android/i.test(ua)) {
+                    document.getElementById('btn-android').classList.remove('hidden');
+                } else {
+                    document.getElementById('btn-ios').classList.remove('hidden');
+                }
             } else {
-                document.getElementById('btn-ios').classList.remove('hidden');
+                document.getElementById('message').textContent = '페이지를 찾을 수 없습니다.';
             }
         </script>
     </div>
