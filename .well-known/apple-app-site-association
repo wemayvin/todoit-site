@@ -4,7 +4,7 @@
     "details": [
       {
         "appID": "AJZ26GG3CC.com.wemayvin.todoit",
-        "paths": ["*"]
+        "paths": ["/share/*"]
       }
     ]
   }
