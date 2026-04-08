@@ -10,8 +10,8 @@
         if (path.startsWith('/share/')) {
             var shareId = path.replace('/share/', '').replace('/', '');
             if (shareId) {
-                window.location.href = 'todoit://share/' + shareId;
-                setTimeout(function() {
+                // 페이지가 숨겨지면(앱이 열리면) 스토어 리다이렉트 취소
+                var timer = setTimeout(function() {
                     var ua = navigator.userAgent || navigator.vendor;
                     if (/android/i.test(ua)) {
                         window.location.href = 'https://play.google.com/store/apps/details?id=com.wemayvin.todoit';
@@ -19,6 +19,15 @@
                         window.location.href = 'https://apps.apple.com/app/todoit/id6742044928';
                     }
                 }, 2000);
+
+                document.addEventListener('visibilitychange', function() {
+                    if (document.hidden) clearTimeout(timer);
+                });
+                window.addEventListener('blur', function() {
+                    clearTimeout(timer);
+                });
+
+                window.location.href = 'todoit://share/' + shareId;
             }
         }
     </script>
