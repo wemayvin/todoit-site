@@ -12,16 +12,32 @@
         h2 { margin-top: 0; }
         h3 { margin-top: 28px; }
         ul { padding-left: 20px; }
-        .lang-switch { text-align: right; font-size: 0.9rem; margin-bottom: 16px; }
-        .lang-switch a { color: #666; text-decoration: none; }
-        .lang-switch a:hover { text-decoration: underline; }
-        .lang-switch .current { color: #333; font-weight: 600; }
+        .lang-switch { text-align: right; margin-bottom: 16px; }
+        .lang-switch select {
+            font-size: 0.9rem;
+            padding: 6px 28px 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #fff;
+            color: #333;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+        }
+        .lang-switch select:hover { border-color: #999; }
+        .lang-switch select:focus { outline: none; border-color: #333; }
     </style>
 </head>
 <body>
 
 <div class="lang-switch">
-    <a href="/privacy-policy">한국어</a> | <span class="current">English</span>
+    <select onchange="if(this.value) location.href=this.value" aria-label="Language">
+        <option value="/privacy-policy">한국어</option>
+        <option value="/en/privacy-policy" selected>English</option>
+    </select>
 </div>
 
 <h2>Privacy Policy</h2>
